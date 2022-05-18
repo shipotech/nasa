@@ -1,0 +1,26 @@
+{
+  "name": "8-nasa",
+  "version": "1.0.0",
+  "description": "Practice project using React.js + Arwes SCI-FI framework for the Front End and Node.js + express.js for the Back End.",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install": "npm install-server && npm install-client",
+    "server": "npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "watch": "npm run server & npm run client",
+    "test": "npm run test --prefix server && npm run test --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shipotech/nasa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shipotech/nasa/issues"
+  },
+  "homepage": "https://github.com/shipotech/nasa#readme"
+}
