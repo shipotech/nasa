@@ -8,7 +8,9 @@ const app = express();
 // Routes
 // Planets
 const planetsRouter = require('./routes/planets/planets.router');
-const planetsController = require('./routes/planets/planets.controller');
+
+// Launches
+const launchesRouter = require('./routes/launches/launches.router');
 
 // Middlewares
 // CORS has an object with a list of whitelisted origins
@@ -23,6 +25,7 @@ app.use(express.static(path.join(__dirname, '..', 'public'))); // serve static f
 
 // Routes
 app.use(planetsRouter);
+app.use(launchesRouter);
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
