@@ -9,7 +9,7 @@
     "install": "npm install-server && npm install-client",
     "server": "npm run watch --prefix server",
     "client": "npm start --prefix client",
-    "watch": "npm run server & npm run client",
+    "watch": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "test": "npm run test --prefix server && npm run test --prefix client"
   },
   "repository": {
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/shipotech/nasa/issues"
   },
-  "homepage": "https://github.com/shipotech/nasa#readme"
+  "homepage": "https://github.com/shipotech/nasa#readme",
+  "devDependencies": {
+    "concurrently": "^7.2.0"
+  }
 }
