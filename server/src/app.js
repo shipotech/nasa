@@ -26,7 +26,10 @@ app.use(express.static(path.join(__dirname, '..', 'public'))); // serve static f
 // Routes
 app.use(planetsRouter);
 app.use(launchesRouter);
-app.get('/', (req, res) => {
+
+// Add "/*" to catch all routes not defined above
+app.get('/*', (req, res) => {
+    // Handle all routes that don't match above in our Client code
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
