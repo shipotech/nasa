@@ -20,8 +20,6 @@ function getAllLaunches() {
 }
 
 function addNewLaunch(launch) {
-    launch.flightNumber++;
-
     launches.set(
         launch.flightNumber,
 
@@ -30,7 +28,7 @@ function addNewLaunch(launch) {
             success: true,
             upcoming: true,
             customers: ['ZTM', 'NASA'],
-            flightNumber: launch.flightNumber
+            flightNumber: latestFlightNumber++
         })
     );
 }
