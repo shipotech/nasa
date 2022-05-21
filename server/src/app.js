@@ -24,8 +24,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public'))); // serve static files built from Client
 
 // Routes
-app.use(planetsRouter);
-app.use(launchesRouter);
+app.use('/planets', planetsRouter);
+app.use('/launches', launchesRouter);
 
 // Add "/*" to catch all routes not defined above
 app.get('/*', (req, res) => {
