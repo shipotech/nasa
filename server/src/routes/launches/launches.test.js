@@ -1,3 +1,12 @@
+// What do we use to test our code?
+// Test runner: which will run our tests and give us the results
+// Test fixtures: how our tests are set up
+// Assertions: what we expect to happen
+// Mocks: what we use to test our code (fake data)
+
+// Jest is a test runner that runs our tests
+// we use Supertest to make requests to our server
+
 const request = require('supertest');
 const app = require('../../app');
 
