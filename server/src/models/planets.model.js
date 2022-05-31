@@ -3,8 +3,8 @@ const {parse} = require('csv-parse');
 const fs = require('fs');
 const path = require("path");
 
-// defaults
-const habitablePlanets = [];
+const planets = require('./planets.mongo');
+
 
 // function to filter habitable planets
 function isHabitable (planet) {
@@ -26,25 +26,48 @@ function loadPlanetsData() {
             comment: '#',
             columns: true // returns an array of objects
         }))
-        .on('data', (row) => {
-            if (isHabitable(row)) {
-                habitablePlanets.push(row);
+        .on('data', async (data) => {
+            if (isHabitable(data)) {
+                //habitablePlanets.push(row); old approach
+                await savePlanet(data);
             }
         })
         .on('error', (error) => {
             console.log(error.message);
             reject(error);
         })
-        .on('end', () => {
+        .on('end', async () => {
             // count the number of habitable planets
-            console.log(`Found ${habitablePlanets.length} habitable planets.`);
+            const count = (await getAllPlanets()).length;
+            console.log(`Found ${count} habitable planets.`);
             resolve()
         });
     });
 }
 
-function getAllPlanets() {
-    return habitablePlanets;
+async function getAllPlanets() {
+    //return habitablePlanets; old approach
+    // Exclude the _id and __v fields from the response (those are created by MongoDB by default)
+    return planets.find({}, {
+        '_id': 0,
+        '__v': 0
+    });
+}
+
+async function savePlanet(planet) {
+    // making an upsert (insert + update)
+    // If planet already exists, do nothing
+    try {
+        await planets.updateOne({
+            keplerName: planet.kepler_name
+        }, {
+            keplerName: planet.kepler_name
+        }, {
+            upsert: true
+        });
+    } catch (error) {
+        console.log(`Error saving planet ${planet.kepler_name} to database. Error: ${error}`);
+    }
 }
 
 module.exports = {
