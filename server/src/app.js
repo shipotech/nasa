@@ -3,14 +3,9 @@ const path = require("path");
 const cors = require('cors');
 const morgan = require("morgan");
 
+const api = require('./routes/api');
 const app = express();
 
-// Routes
-// Planets
-const planetsRouter = require('./routes/planets/planets.router');
-
-// Launches
-const launchesRouter = require('./routes/launches/launches.router');
 
 // Middlewares
 // CORS has an object with a list of whitelisted origins
@@ -23,9 +18,8 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public'))); // serve static files built from Client
 
-// Routes
-app.use('/planets', planetsRouter);
-app.use('/launches', launchesRouter);
+// Mount all routes with "v1" prefix
+app.use('/v1', api);
 
 // Add "/*" to catch all routes not defined above
 app.get('/*', (req, res) => {
