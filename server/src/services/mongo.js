@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config() // Load the .env file
 
 const mongoose = require('mongoose');
 
