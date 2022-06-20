@@ -13,12 +13,14 @@ const {
   mongoConnect,
   mongoDisconnect
 } = require('../../services/mongo');
+const {loadPlanetsData} = require("../../models/planets.model");
 
 describe('Launches API', () => {
 
   // Run this before all tests
   beforeAll(async () => {
     await mongoConnect();
+    await loadPlanetsData()
   });
 
   // Run this after all tests
