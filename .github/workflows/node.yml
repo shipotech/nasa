@@ -31,4 +31,5 @@ jobs:
       # Runs steps in the same order as defined
       - run: npm install
       - run: npm run install-client
-      - run: npm run test
+      - run: npm run install-server
+      - run: npm test --prefix server
