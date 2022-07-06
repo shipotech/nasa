@@ -21,7 +21,8 @@ RUN npm run install-server --only=production
 
 # Copy client folder and run build command
 COPY client/ client/
-RUN npm run build --prefix client # Build client
+RUN npm run build-docker --prefix client # Build client
+
 
 COPY server/ server/
 
